@@ -14,5 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
   // Init Core Library
   $init = new Core;
+ 
   
 ?>
