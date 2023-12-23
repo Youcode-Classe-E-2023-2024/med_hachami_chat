@@ -5,8 +5,10 @@
   
   require_once 'middleware/AuthMiddleware.php';
   require_once 'models/JwtAuth.php';
+  require_once 'SocketServer.php';
 
   require_once '../vendor/autoload.php';
+
  
 
   // Autoload Core Libraries
