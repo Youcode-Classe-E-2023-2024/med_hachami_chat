@@ -6,7 +6,7 @@ use Ratchet\WebSocket\WsServer;
 
 // require 'vendor/autoload.php';
 // require './app/controllers/Chat.php';
-
+#[\AllowDynamicProperties]
 
 Class SocketServer{
 
@@ -22,10 +22,10 @@ Class SocketServer{
                     new Chat()
                 )
             ),
-            8080
+            8081
         );
 
-        echo "WebSocket server started at 0.0.0.0:8080\n";
+        echo "WebSocket server started at 0.0.0.0:8081\n";
 
         $server->run();
     }
