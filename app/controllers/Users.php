@@ -111,7 +111,44 @@ Class Users extends Controller{
     
         move_uploaded_file($file["tmp_name"], $target_file);
         return basename($file["name"]);
+    }
+
+    // public function notMyFriendsAndNotSentRequest($userId){
+    //     AuthMiddleware::authenticate();
+    //     $users = $this->userModel->getNormalUser($userId);
+    //     echo json_encode($users);
+    // }
+
+    public function filter($filterBy , $userId){
+        switch (true) {
+            case ($filterBy == 'all') :
+                $users = $this->userModel->getNormalUser($userId);
+                echo json_encode($users);
+            break;
+            case ($filterBy == 'already') :
+                $users = $this->userModel->getAlreadySentRequest($userId);
+                echo json_encode($users);
+            break;
+            case ($filterBy == 'myfriends') :
+                $users = $this->userModel->getMyFriends($userId);
+                echo json_encode($users);
+            break;
+
       }
+    }
+
+    public function sendRequest($senderId,$reveiverId){
+        AuthMiddleware::authenticate();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $newFriendShip = $this->userModel->addFriendShip($senderId,$reveiverId);
+            if($newFriendShip){
+                echo json_encode(['message' => true]);
+            }else{
+                echo json_encode(['message' => false]);
+            }
+        }
+
+    }
 
 
 }
